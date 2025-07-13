@@ -39,9 +39,9 @@ class Player(pygame.sprite.Sprite):
         self.selected_seed = self.seeds[self.seed_index]
 
     def use_tool(self):
-        print(self.selected_tool)
+        pass
 
-    def used_seed(self):
+    def use_seed(self):
         pass
 
     def import_assets(self):
@@ -103,13 +103,15 @@ class Player(pygame.sprite.Sprite):
                 self.timers["seed use"].activate()
                 self.direction = pygame.math.Vector2()
                 self.frame_index = 0
+                print("use seed")
 
             # change seed
-            if keys[pygame.K_q] and not self.timers["tool switch"].active:
-                self.timers["tool switch"].activate()
-                self.tool_index += 1
-                self.tool_index = self.tool_index if self.tool_index < len(self.tools) else 0
-                self.selected_tool = self.tools[self.tool_index]
+            if keys[pygame.K_e] and not self.timers["seed switch"].active:
+                self.timers["seed switch"].activate()
+                self.seed_index += 1
+                self.seed_index = self.seed_index if self.seed_index < len(self.seeds) else 0
+                self.selected_seed = self.seeds[self.seed_index]
+                print(self.selected_seed)
 
     def get_status(self):
         # idle
