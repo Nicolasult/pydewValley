@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         }
 
         # tools
-        self.selected_tool = "axe"
+        self.selected_tool = "hoe"
 
     def use_tool(self):
         print(self.selected_tool)
