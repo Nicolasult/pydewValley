@@ -25,6 +25,14 @@ class Level:
             for x, y, surf in tmx_data.get_layer_by_name(layer).tiles():
                 Generic((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, LAYERS["house bottom"])
 
+        for layer in ["HouseWalls", "HouseFurnitureTop"]:
+            for x, y, surf in tmx_data.get_layer_by_name(layer).tiles():
+                Generic((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites)
+
+        # fence
+        for x, y, surf in tmx_data.get_layer_by_name("Fence").tiles():
+            Generic((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites)
+
         self.player = Player((640, 360), self.all_sprites)
         Generic(pos =(0,0), 
                 surf = pygame.image.load("graphics/world/ground.png").convert_alpha(), 
