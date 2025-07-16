@@ -4,7 +4,7 @@ from support import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group):
+    def __init__(self, pos, group, collision_sprites):
         super().__init__(group)
 
         self.import_assets()
@@ -20,6 +20,10 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 200
+
+        # collision
+        self.hitbox = self.rect.copyt().inflate((-126, -70))
+        self.collision_sprites = collision_sprites
 
         # timers
         self.timers = {
@@ -133,11 +137,13 @@ class Player(pygame.sprite.Sprite):
 
         # horizontal movement
         self.pos.x += self.direction.x * self.speed * dt
-        self.rect.centerx = self.pos.x
+        self.hitbox.centerx = round(self.pos.x)
+        self.rect.centerx = self.hitbox.centerx
 
         # vertical movement
         self.pos.y += self.direction.y * self.speed * dt
-        self.rect.centery = self.pos.y
+        self.hitbox.centry = round(self.pos.y)
+        self.rect.centery = self.hitbox.centery
 
     def update(self, dt):
         self.input()
