@@ -129,6 +129,19 @@ class Player(pygame.sprite.Sprite):
         for timer in self.timers.values():
             timer.update()
 
+    def collision(self, direction);
+        for sprite in self.collision_sprites.sprites():
+            if hasattr(sprite, "hitbox"):
+                if sprite.hitbox.colliderect(self.hitbox):
+                    if direction == "horizontal":
+                        if self.direction.x > 0:
+                            self.hitbox.right == sprite.hitbox.left
+                        if self.direction.x < 0:
+                            self.hitbox.left == sprite.hitbox.right
+                        self.rect.centerx = self.hitbox.centerx
+                        self.pos.x = self.hitbox.centerx
+    
+
     def move(self, dt):
 
         # normalizing
