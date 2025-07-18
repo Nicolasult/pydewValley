@@ -1,6 +1,6 @@
 import pygame
 from settings import *
-from random import randint
+from random import randint, choice
 
 class Generic(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups, z = LAYERS["main"]):
@@ -55,7 +55,14 @@ class Tree(Generic):
         self.apple_sprites = pygame.sprite.Group()
         self.create_fruit()
 
-    def 
+    def damage(self):
+        # damaging the tree
+        self.health -= 1
+
+        # remove an apple
+        if len(self.apple_sprites.sprites()) > 0:
+            random_apple = choice(self.apple_sprites.sprites())
+            random_apple.kill()
 
     def create_fruit(self):
         for pos in self.apple_pos:

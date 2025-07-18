@@ -4,7 +4,7 @@ from support import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites):
+    def __init__(self, pos, group, collision_sprites, tree_sprites):
         super().__init__(group)
 
         self.import_assets()
@@ -42,6 +42,9 @@ class Player(pygame.sprite.Sprite):
         self.seeds = ["corn", "tomato"]
         self.seed_index = 0
         self.selected_seed = self.seeds[self.seed_index]
+
+        # interaction
+        self.tree_sprites = tree_sprites
 
     def use_tool(self):
         pass
