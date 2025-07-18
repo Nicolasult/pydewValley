@@ -47,7 +47,16 @@ class Player(pygame.sprite.Sprite):
         self.tree_sprites = tree_sprites
 
     def use_tool(self):
-        pass
+        if self.selected_tool == "hoe":
+            pass
+        if self.selected_tool == "axe":
+            for tree in self.tree_sprites():
+                pass
+        if self.selected_tool == "water":
+            pass
+
+    def get_target_pos(self):
+        self.target_pos = self.rect.center + PLAYER_TOOL_OFFSET[self.status.split("_")[0]]
 
     def use_seed(self):
         pass
@@ -174,6 +183,7 @@ class Player(pygame.sprite.Sprite):
         self.input()
         self.get_status()
         self.update_timers()
+        self.get_target_pos()
 
         self.move(dt)
         self.animate(dt)

@@ -62,7 +62,7 @@ class Level:
                     pos = (obj.x, obj.y), 
                     group = self.all_sprites, 
                     collision_sprites = self.collision_sprites,
-                    trees = self.tree_sprites)
+                    tree_sprites = self.tree_sprites)
         Generic(pos =(0,0), 
                 surf = pygame.image.load("graphics/world/ground.png").convert_alpha(), 
                 groups = self.all_sprites, 
