@@ -5,6 +5,7 @@ from overlay import Overlay
 from sprites import Generic, Water, WildFlower, Tree, Interaction
 from pytmx.util_pygame import load_pygame
 from support import *
+from transition import Transition
 
 class Level:
     def __init__(self):
@@ -99,7 +100,7 @@ class Level:
         #print(self.player.item_inventory)
 
         if self.player.sleep:
-            self.transition.play(dt)
+            self.transition.play()
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
