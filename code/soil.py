@@ -28,7 +28,7 @@ class SoilLayer:
 
         # graphics
         self.soil_surfs = import_folder_dict("graphics/soil/")
-        water_surfs = import_folder("graphics/soilwater/")
+        self.water_surfs = import_folder("graphics/soil_water")
 
         self.create_soil_grid()
         self.create_hit_rects()
@@ -71,6 +71,7 @@ class SoilLayer:
                 pos = soil_sprite.rect.topleft
                 surf = choice(self.water_surfs)
                 WaterTile(pos, surf, [self.all_sprites, self.water_sprites])
+
 
     def create_soil_tiles(self):
         self.soil_sprites.empty()
