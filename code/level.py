@@ -27,7 +27,9 @@ class Level:
         self.transition = Transition(self.reset, self.player)
 
         # sky
-        self.rain
+        self.rain = Rain(self.all_sprites)
+        self.raining = True
+
 
     def setup(self):
         tmx_data = load_pygame("data/map.tmx")
@@ -107,8 +109,12 @@ class Level:
         self.all_sprites.update(dt)
 
         self.overlay.display()
-        #print(self.player.item_inventory)
 
+        # rain
+        if self.raining:
+            self.rain.update()
+
+        # transition overlay
         if self.player.sleep:
             self.transition.play()
 

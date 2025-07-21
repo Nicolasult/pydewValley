@@ -22,7 +22,7 @@ class Drop(Generic):
     def update(self, dt):
         # movement
         if self.moving:
-            self.pos += self.direction + self.speed * dt
+            self.pos += self.direction * self.speed * dt
             self.rect.topleft = (round(self.pos.x), round(self.pos.y))
 
         # timer
@@ -34,7 +34,7 @@ class Rain:
         self.all_sprites = all_sprites
         self.rain_drops = import_folder("graphics/rain/drops/")
         self.rain_floor = import_folder("graphics/rain/floor/")
-        self.floor_w, self.floor_h = pygame.image.load("graphics/workd/ground.png").get_size()
+        self.floor_w, self.floor_h = pygame.image.load("graphics/world/ground.png").get_size()
 
     def create_floor(self):
         Drop(
