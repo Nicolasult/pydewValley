@@ -38,14 +38,20 @@ class Rain:
 
     def create_floor(self):
         Drop(
-            surf = choice(self.rain_drops),
-            pos = (randint(0, self.floor_w), randint(0, self.floor_hy)),
+            surf = choice(self.rain_floor),
+            pos = (randint(0, self.floor_w), randint(0, self.floor_h)),
             moving = False,
             groups = self.all_sprites,
             z = LAYERS["rain floor"])
 
     def create_drops(self):
-        Drop()
+        Drop(
+            surf = choice(self.rain_drops),
+            pos = (randint(0, self.floor_w), randint(0, self.floor_h)),
+            moving = True,
+            groups = self.all_sprites,
+            z = LAYERS["rain drops"]
+        )
 
     def update(self):
         self.create_floor()
