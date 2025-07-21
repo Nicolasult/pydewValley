@@ -2,7 +2,7 @@ import pygame
 from settings import *
 from support import import_folder
 from sprites import Generic
-from random import randint
+from random import randint, choice
 
 class Drop(Generic):
     def __init__(self, surf, pos, moving, groups, z):
@@ -25,7 +25,9 @@ class Drop(Generic):
             self.pos += self.direction + self.speed * dt
             self.rect.topleft = (round(self.pos.x), round(self.pos.y))
 
-        
+        # timer
+        if pygame.time.get_ticks() - self.start_time >= self.lifetime:
+            self.kill()
 
 class Rain:
     def __init__(self, all_sprites):
@@ -35,9 +37,15 @@ class Rain:
         self.floor_w, self.floor_h = pygame.image.load("graphics/workd/ground.png").get_size()
 
     def create_floor(self):
-        Drop()
+        Drop(
+            surf = choice(self.rain_drops),
+            pos = (randint(0, self.floor_w), randint(0, self.floor_hy)),
+            moving = False,
+            groups = self.all_sprites,
+            z = LAYERS["rain floor"])
 
     def create_drops(self):
+        Drop()
 
     def update(self):
         self.create_floor()
