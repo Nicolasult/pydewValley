@@ -29,7 +29,7 @@ class Level:
         # sky
         self.rain = Rain(self.all_sprites)
         self.raining = True
-
+        self.soil_layer.raining = self.raining
 
     def setup(self):
         tmx_data = load_pygame("data/map.tmx")
@@ -96,6 +96,8 @@ class Level:
     def reset(self):
         # reset soil grid    
         self.soil_layer.remove_water()
+        # randomize the rain
+        self.soil_layer.raining = self.raining
 
         # reset apples
         for tree in self.tree_sprites.sprites():
