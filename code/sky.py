@@ -12,6 +12,19 @@ class Drop(Generic):
         self.lifetime = randint(400, 500)
         self.start_time = pygame.time.get_ticks()
 
+        # moving
+        self.moving = moving
+        if self.moving == True:
+            self.pos = pygame.math.Vector2(self.rect.topleft)
+            self.direction = pygame.math.Vector2(-2, 4)
+            self.speed = randint(200, 250)
+
+    def update(self, dt):
+        # movement
+        if self.moving:
+            self.pos += self.direction + self.speed * dt
+            self.rect.topleft = (round(self.pos.x), round(self.pos.y))
+
         
 
 class Rain:
