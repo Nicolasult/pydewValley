@@ -31,7 +31,7 @@ class Level:
         self.rain = Rain(self.all_sprites)
         self.raining = randint(0, 10) > 7
         self.soil_layer.raining = self.raining
-        self.sky = sky
+        self.sky = Sky
 
     def setup(self):
         tmx_data = load_pygame("data/map.tmx")
@@ -132,6 +132,9 @@ class Level:
         # rain
         if self.raining:
             self.rain.update()
+
+        # daytime
+        self.sky.display(dt)  
 
         # transition overlay
         if self.player.sleep:
