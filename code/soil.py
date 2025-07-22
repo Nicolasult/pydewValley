@@ -44,7 +44,7 @@ class Plant(pygame.sprite.Sprite):
             self.age += self.grow_speed
 
             self.image = self.frames[int(self.age)]
-            self.rect = self.image.get_rect(midbottom = soil.rect.midbottom + pygame.math.Vector2(0, self.y_offset))
+            self.rect = self.image.get_rect(midbottom = self.soil.rect.midbottom + pygame.math.Vector2(0, self.y_offset))
 
 class SoilLayer:
     def __init__(self, all_sprites):
@@ -124,8 +124,8 @@ class SoilLayer:
                     cell.remove("W")
 
     def check_watered(self, pos):
-        x = soil_sprite.rect.x // TILE_SIZE
-        y = soil_sprite.rect.y // TILE_SIZE
+        x = pos[0] // TILE_SIZE
+        y = pos[1] // TILE_SIZE
         cell = self.grid[y][x]
         is_watered = "W" in cell
         return is_watered
@@ -140,7 +140,9 @@ class SoilLayer:
                     self.grid[y][x].append("P")
                     Plant(seed, [self.all_sprites, self.plant_sprites], soil_sprite, self.check_watered)
 
-    
+    def update_plants(self):
+        for plant in self.plant_sprites.sprites():
+            plant.grow()
 
     def create_soil_tiles(self):
         self.soil_sprites.empty()
