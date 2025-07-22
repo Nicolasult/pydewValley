@@ -94,6 +94,16 @@ class SoilLayer:
                 if "W" in cell:
                     cell.remove("W")
 
+    def plant_seed(self, target_pos, seed):
+        for soil_sprite in self.soil_sprites.sprites():
+            if soil_sprite.rect.collidepoint(target_pos):
+                x = soil_sprite.rect.x // TILE_SIZE
+                y = soil_sprite.rect.y // TILE_SIZE
+                
+                if "P" not in self.grid[y][x]:
+                    self.grid[x][y].append["P"]
+                    Plant()
+
     def create_soil_tiles(self):
         self.soil_sprites.empty()
         for index_row, row in enumerate(self.grid):
