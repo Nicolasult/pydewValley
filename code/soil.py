@@ -45,6 +45,7 @@ class SoilLayer:
         self.all_sprites = all_sprites
         self.soil_sprites = pygame.sprite.Group()
         self.water_sprites = pygame.sprite.Group()
+        self.plant_sprites = pygame.sprite.Group()
 
         # graphics
         self.soil_surfs = import_folder_dict("graphics/soil/")
@@ -121,8 +122,8 @@ class SoilLayer:
                 y = soil_sprite.rect.y // TILE_SIZE
                 
                 if "P" not in self.grid[y][x]:
-                    self.grid[x][y].append["P"]
-                    Plant()
+                    self.grid[y][x].append("P")
+                    Plant(seed, [self.all_sprites, self.plant_sprites], soil_sprite)
 
     def create_soil_tiles(self):
         self.soil_sprites.empty()
