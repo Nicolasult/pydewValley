@@ -33,6 +33,9 @@ class Level:
         self.soil_layer.raining = self.raining
         self.sky = Sky()
 
+        # shop
+        self.shop_active = False
+
     def setup(self):
         tmx_data = load_pygame("data/map.tmx")
 
@@ -82,9 +85,13 @@ class Level:
                     collision_sprites = self.collision_sprites,
                     tree_sprites = self.tree_sprites,
                     interaction = self.interaction_sprites,
-                    soil_layer = self.soil_layer)
+                    soil_layer = self.soil_layer,
+                    toggle_shop = self.toggle_shop)
                 
             if obj.name == "Bed":
+                Interaction((obj.x, obj.y), (obj.width, obj.height), self.interaction_sprites, obj.name)
+
+            if obj.name == "Trader":
                 Interaction((obj.x, obj.y), (obj.width, obj.height), self.interaction_sprites, obj.name)
 
         Generic(pos =(0,0), 
@@ -94,6 +101,9 @@ class Level:
                 
     def player_add(self, item):
         self.player.item_inventory[item] += 1
+
+    def toggle_shop(self):
+        self.shop_active = not self.shop_active
 
     def reset(self):
         # plants
@@ -142,6 +152,8 @@ class Level:
         # transition overlay
         if self.player.sleep:
             self.transition.play()
+
+        print(self.shop_active)
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
