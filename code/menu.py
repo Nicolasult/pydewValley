@@ -17,6 +17,14 @@ class Menu:
         # entries
         self.options = list(self.player.item_inventory.keys()) + list(self.player.seed_inventory.keys())
         self.sell_border = len(self.player.item_inventory) - 1
+        self.setup()
+
+    def setup(self):
+        # create the text surfaces
+        self.text_surfs = []
+        for item in self.options:
+            text_surf = self.font.render(item, False, "Black")
+            self.text_surfs.append(text_surf)
 
 
     def input(self):
@@ -27,4 +35,5 @@ class Menu:
 
     def update(self):
         self.input()
-        self.display_surface.blit(pygame.Surface((1000, 1000)), (0, 0))
+        for text_index, text_surf in enumerate(self.text_surfs):
+            self.display_surface.blit(text_surf, (100, text_index * 50))
