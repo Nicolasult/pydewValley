@@ -23,6 +23,7 @@ class Menu:
         text_surf = self.font.render(f"${self.player.money}", False, "Black")
         text_rect = text_surf.get_rect(midbottom = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 20))
 
+        pygame.draw.rect(self.display_surface, "White", text_rect.inflate(10, 10), 0, 6)
         self.display_surface.blit(text_surf, text_rect)
 
     def setup(self):
@@ -45,11 +46,21 @@ class Menu:
         if keys[pygame.K_ESCAPE]:
             self.toggle_menu()
 
+    def show_entry(self, text_surf, amount, top):
+        # background
+        bg_rect = pygame.Rect(self.main_rect.left, top, self.width, text_surf.get_height() + self.padding * 2)
+        pygame.draw.rect(self.display_surface, "White", bg_rect, 0, 4)
+
+        # text
+
+        # amount
+
     def update(self):
         self.input()
         self.display_money()
-        pygame.draw.rect(self.display_surface, "red", self.main_rect)
-        #for text_index, text_surf in enumerate(self.text_surfs):
-            #self.display_surface.blit(text_surf, (100, text_index * 50))
+
+        for text_index, text_surf in enumerate(self.text_surfs):
+            top = self.main_rect.top + text_index * (text_surf.get_height() + (self.padding * 2) + self.space)
+            self.show_entry(text_surf, 0, top)
 
         
