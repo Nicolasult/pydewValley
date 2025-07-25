@@ -63,6 +63,19 @@ class Menu:
             if keys[pygame.K_DOWN]:
                 self.index += 1
                 self.timer.activate()
+            if keys[pygame.K_SPACE]:
+                self.timer.activate()
+
+                # get item
+                current_item = self.options[self.index]
+
+                # sell
+                if self.index <= self.sell_border:
+                    if self.player.item_inventory[current_item] > 0:
+                        self.player.item_inventory[current_item] -= 1
+                        self.player.money += SALE_PRICES[current_item]
+
+                # buy
         
         if self.index < 0:
             self.index = len(self.options) - 1
