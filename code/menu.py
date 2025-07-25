@@ -76,6 +76,11 @@ class Menu:
                         self.player.money += SALE_PRICES[current_item]
 
                 # buy
+                else:
+                    seed_price = PURCHASE_PRICES[current_item]
+                    if self.player.money >= seed_price:
+                        self.player.seed_inventory[current_item] += 1
+                        self.player.money -= PURCHASE_PRICES[current_item]
         
         if self.index < 0:
             self.index = len(self.options) - 1
